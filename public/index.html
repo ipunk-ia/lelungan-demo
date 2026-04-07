@@ -182,29 +182,44 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
-            line-height: 1;
+            text-decoration: none;
+            z-index: 2;
+        }
+        .logo span {
+            transform: translateY(-2px);
         }
         .logo svg { width: 30px; height: 30px; display: block; }
         .nav-links {
             display: flex;
             gap: 30px;
             align-items: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .nav-links a {
             font-weight: 500;
             transition: var(--transition);
-            line-height: 1;
-            display: flex;
-            align-items: center;
+            text-decoration: none;
+        }
+        .nav-links > a:not(.btn) {
+            transform: translateY(-1px);
         }
         .nav-links a:hover { color: var(--primary); }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 2;
+        }
         .lang-toggle {
             background: none; border: none;
             font-family: var(--font-body);
             font-weight: 700; cursor: pointer;
             color: var(--text-dark);
-            display: flex; align-items: center; gap: 5px;
-            line-height: 1;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 0;
+            transform: translateY(-1px);
         }
         .lang-toggle span.active { color: var(--primary); }
         .btn {
@@ -216,10 +231,9 @@
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
         }
         .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
         .btn-outline {
@@ -231,6 +245,7 @@
             background: var(--primary);
             color: var(--white);
         }
+        .mobile-only { display: none; }
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
 
         /* Hero */
@@ -435,8 +450,11 @@
                 display: none; position: absolute; top: 100%; left: 0; width: 100%;
                 background: var(--white); flex-direction: column; padding: 20px;
                 box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                transform: none;
             }
             .nav-links.active { display: flex; }
+            .nav-actions .desktop-btn { display: none; }
+            .mobile-only { display: inline-block; text-align: center; margin-top: 10px; }
             .mobile-menu-btn { display: block; }
             .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
             .form-grid { grid-template-columns: 1fr; }
@@ -459,7 +477,7 @@
         <div class="container nav-container">
             <a href="#" class="logo">
                 <svg viewBox="0 0 100 100"><polygon points="50,10 90,90 10,90"/></svg>
-                lelungan
+                <span>lelungan</span>
             </a>
             <nav class="nav-links" id="nav-links">
                 <a href="#home" data-i18n="nav_home">Beranda</a>
@@ -467,12 +485,15 @@
                 <a href="#about" data-i18n="nav_about">Tentang</a>
                 <a href="#reservation" data-i18n="nav_reservation">Reservasi</a>
                 <a href="#contact" data-i18n="nav_contact">Kontak</a>
+                <a href="#reservation" class="btn mobile-only" data-i18n="nav_cta">Reservasi Sekarang</a>
+            </nav>
+            <div class="nav-actions">
                 <button class="lang-toggle" onclick="toggleLang()">
                     <span id="lang-id" class="active">ID</span> | <span id="lang-en">EN</span>
                 </button>
-                <a href="#reservation" class="btn" data-i18n="nav_cta">Reservasi Sekarang</a>
-            </nav>
-            <button class="mobile-menu-btn" onclick="document.getElementById('nav-links').classList.toggle('active')">☰</button>
+                <a href="#reservation" class="btn desktop-btn" data-i18n="nav_cta">Reservasi Sekarang</a>
+                <button class="mobile-menu-btn" onclick="document.getElementById('nav-links').classList.toggle('active')">☰</button>
+            </div>
         </div>
     </header>
 
